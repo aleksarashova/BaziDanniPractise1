@@ -1,6 +1,7 @@
 package org.example.praktika1.modules;
 
 import jakarta.persistence.*;
+import org.example.praktika1.dtos.CityDto;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.io.Serializable;
@@ -49,7 +50,7 @@ public class City implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
+    public CityDto getName() {
         return name;
     }
 

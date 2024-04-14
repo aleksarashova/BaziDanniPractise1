@@ -6,8 +6,10 @@ import org.example.praktika1.modules.City;
 import org.example.praktika1.modules.Country;
 import org.example.praktika1.repositories.AirportRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -18,8 +20,9 @@ public class AirportService {
     @Autowired
     private AirportRepo airportRepo;
 
-    public List<?> filterAndGroupByCountry(AirportFilter airportFilter) {
+    public List<?> filterAndGroupByCountry(AirportFilter airportFilter, Pageable pageable) {
         List<Airport> airports = airportRepo.findAll();
+        Page<Airport> airportPage = airportRepo.findAll((org.springframework.data.domain.Pageable) pageable);
         List<?> result;
 
         if (airportFilter != null) {
@@ -61,8 +64,9 @@ public class AirportService {
         return result;
     }
 
-    public List<?> filterAndGroupByAirport(AirportFilter airportFilter) {
+    public List<?> filterAndGroupByAirport(AirportFilter airportFilter, Pageable pageable) {
         List<Airport> airports = airportRepo.findAll();
+        Page<Airport> airportPage = airportRepo.findAll((org.springframework.data.domain.Pageable) pageable);
         List<?> result;
 
         if (airportFilter != null) {

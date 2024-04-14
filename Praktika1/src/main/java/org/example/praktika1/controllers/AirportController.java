@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,13 +59,13 @@ public class AirportController {
     }
 
     @PostMapping("/airports/filter")
-    public ResponseEntity<?> filterAirports(@RequestParam boolean countryAsRoot, @RequestBody AirportFilter airportFilter) {
+    public ResponseEntity<?> filterAirports(@RequestParam boolean countryAsRoot, @RequestBody AirportFilter airportFilter, Pageable pageable) {
         List<?> result;
 
         if (countryAsRoot) {
-            result = airportService.filterAndGroupByCountry(airportFilter);
+            result = airportService.filterAndGroupByCountry(airportFilter, pageable);
         } else {
-            result = airportService.filterAndGroupByAirport(airportFilter);
+            result = airportService.filterAndGroupByAirport(airportFilter, pageable);
         }
 
         return ResponseEntity.ok(result);
